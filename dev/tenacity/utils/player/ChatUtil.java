@@ -22,12 +22,6 @@ public class ChatUtil implements Utils {
         }
     }
 
-    public static void irc(String message) {
-        if (mc.thePlayer != null) {
-            mc.thePlayer.addChatMessage(new ChatComponentText("IRC-" + message));
-        }
-    }
-
     public static void scriptError(ScriptModule scriptFile, String message) {
         if (mc.thePlayer != null) {
             if (scriptFile.getFile() == null) {

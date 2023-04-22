@@ -6,7 +6,6 @@ import dev.tenacity.event.impl.render.NametagRenderEvent;
 import dev.tenacity.event.impl.render.Render2DEvent;
 import dev.tenacity.event.impl.render.Render3DEvent;
 import dev.tenacity.event.impl.render.ShaderEvent;
-import dev.tenacity.intent.irc.IRCUtil;
 import dev.tenacity.module.Category;
 import dev.tenacity.module.Module;
 import dev.tenacity.module.settings.ParentAttribute;
@@ -113,11 +112,7 @@ public class ESP2D extends Module {
                         font = mc.fontRendererObj;
                     }
                     EntityLivingBase renderingEntity = (EntityLivingBase) entity;
-                    String ircName = "";
-                    if (IRCUtil.usersMap.containsKey(renderingEntity.getName())) {
-                        ircName = " \2477(\247d" + IRCUtil.usersMap.get(renderingEntity.getName()) + "\2477)";
-                    }
-                    String name = (nametagSettings.getSetting("Formatted Tags").isEnabled() ? renderingEntity.getDisplayName().getFormattedText() : StringUtils.stripControlCodes(renderingEntity.getDisplayName().getUnformattedText())) + ircName;
+                    String name = (nametagSettings.getSetting("Formatted Tags").isEnabled() ? renderingEntity.getDisplayName().getFormattedText() : StringUtils.stripControlCodes(renderingEntity.getDisplayName().getUnformattedText()));
                     StringBuilder text = new StringBuilder(
                             (FriendCommand.isFriend(renderingEntity.getName()) ? "§d" : redTags.isEnabled() ? "§c" : "§f") + name);
                     if (nametagSettings.getSetting("Health Text").isEnabled()) {
@@ -199,13 +194,9 @@ public class ESP2D extends Module {
                 }
                 EntityLivingBase renderingEntity = (EntityLivingBase) entity;
                 if (nametags.isEnabled()) {
-                    String ircName = "";
-                    if (IRCUtil.usersMap.containsKey(renderingEntity.getName())) {
-                        ircName = " \2477(\247d" + IRCUtil.usersMap.get(renderingEntity.getName()) + "\2477)";
-                    }
                     float healthValue = renderingEntity.getHealth() / renderingEntity.getMaxHealth();
                     Color healthColor = healthValue > .75 ? new Color(66, 246, 123) : healthValue > .5 ? new Color(228, 255, 105) : healthValue > .35 ? new Color(236, 100, 64) : new Color(255, 65, 68);
-                    String name = (nametagSettings.getSetting("Formatted Tags").isEnabled() ? renderingEntity.getDisplayName().getFormattedText() : StringUtils.stripControlCodes(renderingEntity.getDisplayName().getUnformattedText())) + ircName;
+                    String name = (nametagSettings.getSetting("Formatted Tags").isEnabled() ? renderingEntity.getDisplayName().getFormattedText() : StringUtils.stripControlCodes(renderingEntity.getDisplayName().getUnformattedText()));
                     StringBuilder text = new StringBuilder(
                             (FriendCommand.isFriend(renderingEntity.getName()) ? "§d" : redTags.isEnabled() ? "§c" : "§f") + name);
                     if (nametagSettings.getSetting("Health Text").isEnabled()) {

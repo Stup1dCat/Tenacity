@@ -2,7 +2,6 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 import dev.tenacity.module.impl.render.HUDMod;
-import dev.tenacity.module.impl.render.IRC;
 import dev.tenacity.utils.render.ColorUtil;
 import dev.tenacity.utils.font.AbstractFontRenderer;
 import dev.tenacity.utils.render.GLUtil;
@@ -234,12 +233,6 @@ public class GuiNewChat extends Gui {
                                 drawRect(i2, j2 - 9, i2 + l + 4, j2, l1 / 2 << 24);
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GLUtil.startBlend();
-
-                                IRC.filter = true;
-                                if(s.startsWith("§rIRC-")) {
-                                    s = s.substring(6);
-                                    IRC.filter = false;
-                                }
                                 fr.drawStringWithShadow(s, (float) i2, (float) (j2 - (HUDMod.customFont.isEnabled() ? 8.5f : 8)), 16777215 + (l1 << 24));
                                 GLUtil.endBlend();
                             }

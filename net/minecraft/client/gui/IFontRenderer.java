@@ -1,10 +1,7 @@
 package net.minecraft.client.gui;
 
-import dev.tenacity.module.impl.render.IRC;
 import dev.tenacity.module.impl.render.Streamer;
-import dev.tenacity.utils.render.RenderUtil;
 import dev.tenacity.utils.font.AbstractFontRenderer;
-import dev.tenacity.utils.render.GLUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -27,8 +24,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class IFontRenderer implements IResourceManagerReloadListener, AbstractFontRenderer {
     private static final ResourceLocation[] unicodePageLocations = new ResourceLocation[256];
@@ -619,7 +616,6 @@ public class IFontRenderer implements IResourceManagerReloadListener, AbstractFo
             this.posY = y;
 
             text = Streamer.filter(text);
-            text = IRC.filter(text);
 
 
             this.renderStringAtPos(text, dropShadow);

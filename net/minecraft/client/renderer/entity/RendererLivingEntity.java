@@ -2,7 +2,6 @@ package net.minecraft.client.renderer.entity;
 
 import com.google.common.collect.Lists;
 import dev.tenacity.Tenacity;
-import dev.tenacity.intent.irc.IRCUtil;
 import dev.tenacity.module.impl.render.CustomModel;
 import dev.tenacity.module.impl.render.ESP2D;
 import dev.tenacity.module.impl.render.TargetHUDMod;
@@ -585,11 +584,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             float f = entity.isSneaking() ? NAME_TAG_RANGE_SNEAK : NAME_TAG_RANGE;
 
             if (d0 < (double) (f * f)) {
-                String ircName = "";
-                if (IRCUtil.usersMap.containsKey(entity.getName())) {
-                    ircName = "§7(§d" + IRCUtil.usersMap.get(entity.getName()) + "§7)§r ";
-                }
-                String s = ircName + entity.getDisplayName().getFormattedText();
+                String s = entity.getDisplayName().getFormattedText();
 
                 float f1 = 0.02666667F;
                 GlStateManager.alphaFunc(516, 0.1F);

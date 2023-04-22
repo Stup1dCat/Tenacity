@@ -1,7 +1,6 @@
 package dev.tenacity.utils.font;
 
 import dev.tenacity.utils.tuples.mutable.MutablePair;
-import dev.tenacity.module.impl.render.IRC;
 import dev.tenacity.module.impl.render.Streamer;
 import dev.tenacity.utils.misc.MathUtils;
 import dev.tenacity.utils.render.GLUtil;
@@ -109,8 +108,6 @@ public class CustomFont implements AbstractFontRenderer {
             return 0;
         }
 
-
-        text = IRC.filter(text);
         text = Streamer.filter(text);
 
 

@@ -9,8 +9,6 @@ import dev.tenacity.config.ConfigManager;
 import dev.tenacity.config.DragManager;
 import dev.tenacity.intent.api.account.GetUserInfo;
 import dev.tenacity.intent.api.account.IntentAccount;
-import dev.tenacity.intent.cloud.Cloud;
-import dev.tenacity.intent.irc.IRCUtil;
 import dev.tenacity.module.BackgroundProcess;
 import dev.tenacity.module.Module;
 import dev.tenacity.module.ModuleCollection;
@@ -26,7 +24,6 @@ import dev.tenacity.module.impl.render.wings.DragonWings;
 import dev.tenacity.scripting.api.ScriptManager;
 import dev.tenacity.ui.altmanager.GuiAltManager;
 import dev.tenacity.ui.altmanager.helpers.KingGenApi;
-import dev.tenacity.utils.client.ReleaseType;
 import dev.tenacity.utils.misc.NetworkingUtils;
 import dev.tenacity.utils.objects.DiscordAccount;
 import dev.tenacity.utils.render.EntityCulling;
@@ -161,7 +158,6 @@ public class ProtectedLaunch {
         modules.put(PlayerList.class, new PlayerList());
         modules.put(JumpCircle.class, new JumpCircle());
         modules.put(CustomModel.class, new CustomModel());
-        modules.put(IRC.class, new IRC());
         modules.put(EntityEffects.class, new EntityEffects());
         modules.put(Chams.class, new Chams());
         modules.put(BrightPlayers.class, new BrightPlayers());
@@ -194,7 +190,6 @@ public class ProtectedLaunch {
         DragManager.loadDragData();
 
         Tenacity.INSTANCE.setAltManager(new GuiAltManager());
-        Tenacity.INSTANCE.setIrcUtil(new IRCUtil());
 
 
         //String apiKey = Tenacity.INSTANCE.getIntentAccount().api_key;

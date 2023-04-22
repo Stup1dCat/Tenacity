@@ -5,7 +5,6 @@ import dev.tenacity.utils.tuples.Pair;
 import dev.tenacity.utils.tuples.mutable.MutablePair;
 import dev.tenacity.Tenacity;
 import dev.tenacity.config.DragManager;
-import dev.tenacity.intent.irc.IRCUtil;
 import dev.tenacity.module.impl.render.ArrayListMod;
 import dev.tenacity.module.impl.render.HUDMod;
 import dev.tenacity.module.impl.render.SpotifyMod;
@@ -152,8 +151,6 @@ public class GuiChat extends GuiScreen {
 
     public static Animation openingAnimation = new DecelerateAnimation(175, 1, Direction.BACKWARDS);
 
-    public static IRCButton ircSettings;
-
 
     /**
      * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
@@ -165,11 +162,6 @@ public class GuiChat extends GuiScreen {
             spotifyMod = (SpotifyMod) Tenacity.INSTANCE.getModuleCollection().get(SpotifyMod.class);
             arraylistMod = (ArrayListMod) Tenacity.INSTANCE.getModuleCollection().get(ArrayListMod.class);
         }
-
-        if (ircSettings == null) {
-            ircSettings = new IRCButton();
-        }
-
 
         for (Dragging dragging : DragManager.draggables.values()) {
             if (!dragging.hoverAnimation.getDirection().equals(Direction.BACKWARDS)) {
@@ -203,12 +195,6 @@ public class GuiChat extends GuiScreen {
         }
 
         Gui.drawRect2(2, this.height - (14 * openingAnimation.getOutput().floatValue()), this.width - 4, 12, Integer.MIN_VALUE);
-
-        ircSettings.setIrcAvaliable(IRCUtil.INSTANCE != null);
-        ircSettings.x = HUDMod.xOffset + 10;
-        ircSettings.topY = this.height - ((14 * openingAnimation.getOutput().floatValue()) + 33);
-        ircSettings.bottomY = this.height - (14 * openingAnimation.getOutput().floatValue());
-        ircSettings.drawScreen(mouseX, mouseY);
 
         AbstractFontRenderer abstractFontRenderer = this.mc2.fontRendererObj;
         if (HUDMod.customFont.isEnabled()) {
@@ -283,7 +269,6 @@ public class GuiChat extends GuiScreen {
         }
 
         this.inputField.mouseClicked(mouseX, mouseY, mouseButton);
-        ircSettings.mouseClicked(mouseX, mouseY, mouseButton);
 
         if (spotifyMod.isEnabled()) {
             float spacing = 0;
@@ -475,155 +460,5 @@ public class GuiChat extends GuiScreen {
      */
     public boolean doesGuiPauseGame() {
         return false;
-    }
-
-    @Getter
-    @Setter
-    public static class IRCButton implements Screen {
-        private float x, topY, bottomY, width, height;
-        private boolean hovering, clicked, ircAvaliable;
-        private String selected = "Tenacity";
-        //hovering, selected, hoverAnimation
-        private MutablePair<Boolean, Animation> tenacityButton = MutablePair.of(false, new DecelerateAnimation(250, 1));
-        private MutablePair<Boolean, Animation> intentButton = MutablePair.of(false, new DecelerateAnimation(250, 1));
-        ;
-        private Animation hoverAnimation = new DecelerateAnimation(250, 1), clickedAnimation = new DecelerateAnimation(250, 1);
-
-        @Override
-        public void initGui() {
-
-        }
-
-        @Override
-        public void keyTyped(char typedChar, int keyCode) {
-
-        }
-
-        @Override
-        public void drawScreen(int mouseX, int mouseY) {
-            AbstractFontRenderer font = tenacityFont16;
-
-            if(GuiChat.openingAnimation.getDirection().backwards()) clicked = false;
-
-            clickedAnimation.setDirection(clicked ? Direction.FORWARDS : Direction.BACKWARDS);
-            float clickAnim = clickedAnimation.getOutput().floatValue();
-
-            setWidth(80 + (clickAnim * 125));
-            setHeight(MathUtils.interpolateFloat(font.getHeight() + 6, (bottomY - topY) - 4, clickAnim));
-
-
-            float rectY = bottomY - (height + 2);
-            float realY = MathUtils.interpolateFloat(rectY, topY + 2, clickAnim);
-
-
-            hoverAnimation.setDirection(hovering ? Direction.FORWARDS : Direction.BACKWARDS);
-
-            float hoverAnim = hoverAnimation.getOutput().floatValue();
-            Color rectColor = new Color(45, 45, 45);
-
-            Color color = ColorUtil.interpolateColorC(rectColor, rectColor.brighter(), clicked ? 0 : hoverAnim);
-            float alpha = GuiChat.openingAnimation.getOutput().floatValue();
-
-            RoundedUtil.drawRound(x, realY, width, height, 5, ColorUtil.applyOpacity(color, alpha));
-
-            Color backTextColor = ColorUtil.interpolateColorC(Color.WHITE, Color.WHITE.darker(), hoverAnim);
-            tenacityFont14.drawString("<- Back", x + 5, realY + 3, ColorUtil.applyOpacity(backTextColor, alpha * clickAnim));
-            float backWidth = tenacityFont14.getStringWidth("<- Back");
-
-            if (clicked) {
-                hoverAnimation.setDuration(150);
-                hovering = HoveringUtil.isHovering(x + 5, realY + 3, backWidth, tenacityFont14.getHeight(), mouseX, mouseY);
-            } else {
-                hovering = HoveringUtil.isHovering(x, realY, width, height, mouseX, mouseY);
-                hoverAnimation.setDuration(200);
-            }
-
-            /*if (ircAvaliable && (clicked || clickedAnimation.getDirection().forwards())) {
-
-                tenacityFont14.drawString("§7To type in IRC, prefix your messages with a dash (-).",
-                        x + backWidth + 12, realY + 3,
-                        ColorUtil.applyOpacity(-1, alpha * clickAnim));
-
-                String infoText = "Tenacity users online: §a" + IRCUtil.INSTANCE.getProductOnline() +
-                        "§r | Total Intent IRC users online: §a" + IRCUtil.INSTANCE.getGlobalOnline();
-
-                float infoX = x + 5;
-                tenacityFont14.drawString(infoText, infoX, realY + height - (tenacityFont14.getHeight() + 3), ColorUtil.applyOpacity(-1, alpha * clickAnim));
-
-
-                tenacityBoldFont16.drawString("IRC Channel:", infoX + .5f,
-                        realY + 11.5f, ColorUtil.applyOpacity(-1, alpha * clickAnim));
-
-                float rectX = infoX + tenacityBoldFont16.getStringWidth("IRC Channel:") + 5.5f;
-
-                float buttonY = realY + 11;
-                float tenacityButtonWidth = tenacityFont14.getStringWidth("Tenacity") + 4;
-                float intentButtonWidth = tenacityFont14.getStringWidth("Intent") + 4;
-                float buttonHeight = tenacityFont14.getHeight() + 2;
-                Color greenColor = new Color(0, 128, 63);
-                boolean tenaSelected = selected.equals("Tenacity");
-                int selection = tenaSelected ? 1 : 0;
-
-                tenacityButton.setFirst(HoveringUtil.isHovering(rectX, buttonY, tenacityButtonWidth, buttonHeight, mouseX, mouseY));
-                tenacityButton.getSecond().setDirection(tenacityButton.getFirst() ? Direction.FORWARDS : Direction.BACKWARDS);
-
-                float tenaButtonAnim = tenacityButton.getSecond().getOutput().floatValue();
-
-                Color tenaColor = ColorUtil.interpolateColorC(rectColor.darker(), greenColor, selection);
-                Color tenacityRectColor = ColorUtil.interpolateColorC(tenaColor, tenaSelected ? tenaColor.brighter() : rectColor.brighter(), tenaButtonAnim);
-
-                RoundedUtil.drawRound(rectX, buttonY, tenacityButtonWidth, buttonHeight, 3, ColorUtil.applyOpacity(tenacityRectColor, alpha * clickAnim));
-                tenacityFont14.drawString("Tenacity", rectX + 2, buttonY + 1, ColorUtil.applyOpacity(-1, alpha * clickAnim));
-
-                float intentX = rectX + tenacityFont16.getStringWidth("Tenacity") + 5;
-
-                intentButton.setFirst(HoveringUtil.isHovering(intentX, buttonY, intentButtonWidth, buttonHeight, mouseX, mouseY));
-                intentButton.getSecond().setDirection(intentButton.getFirst() ? Direction.FORWARDS : Direction.BACKWARDS);
-                float intentButtonAnim = intentButton.getSecond().getOutput().floatValue();
-
-
-                Color intentColor = ColorUtil.interpolateColorC(greenColor, rectColor.darker(), selection);
-                Color intentRectColor = ColorUtil.interpolateColorC(intentColor, !tenaSelected ? intentColor.brighter() : rectColor.brighter(), intentButtonAnim);
-
-                RoundedUtil.drawRound(intentX, buttonY, intentButtonWidth, buttonHeight, 3, ColorUtil.applyOpacity(intentRectColor, alpha * clickAnim));
-                tenacityFont14.drawString("Intent", intentX + 2, buttonY + 1, ColorUtil.applyOpacity(-1, alpha * clickAnim));
-
-            }*/
-
-
-            font.drawString(ircAvaliable ? "Show IRC settings" : "Unavailable", x + 4, realY + font.getMiddleOfBox(height),
-                    ColorUtil.applyOpacity(-1, alpha * (1 - clickAnim)));
-
-
-            FontUtil.iconFont16.drawString(ircAvaliable ? FontUtil.SETTINGS : FontUtil.XMARK, x + 7 + font.getStringWidth("Show IRC settings"), .5f + realY + FontUtil.iconFont16.getMiddleOfBox(height),
-                    ColorUtil.applyOpacity(-1, alpha * (1 - clickAnim)));
-
-
-        }
-
-        @Override
-        public void mouseClicked(int mouseX, int mouseY, int button) {
-            if (!ircAvaliable) return;
-            if (hovering && button == 0) {
-                clicked = !clicked;
-            }
-
-            if (clicked) {
-
-                if (tenacityButton.getFirst()) {
-                    selected = "Tenacity";
-                } else if (intentButton.getFirst()) {
-                    selected = "Intent";
-                }
-
-
-            }
-
-        }
-
-        @Override
-        public void mouseReleased(int mouseX, int mouseY, int state) {
-
-        }
     }
 }

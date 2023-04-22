@@ -1,6 +1,5 @@
 package net.minecraft.client.renderer.entity.layers;
 
-import dev.tenacity.intent.irc.IRCUtil;
 import dev.tenacity.module.impl.render.HUDMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -70,8 +69,7 @@ public class LayerCape implements LayerRenderer<AbstractClientPlayer> {
 
     private boolean renderClientCape(AbstractClientPlayer entitylivingbaseIn, float partialTicks) {
         Session session = Minecraft.getMinecraft().getSession();
-        if ((HUDMod.hudCustomization.getSetting("Render Cape").isEnabled() && session != null && entitylivingbaseIn.getName().equals(session.getUsername())
-                || IRCUtil.usersMap.containsKey(entitylivingbaseIn.getName()))) {
+        if ((HUDMod.hudCustomization.getSetting("Render Cape").isEnabled() && session != null && entitylivingbaseIn.getName().equals(session.getUsername()))) {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.playerRenderer.bindTexture(cape);
             GlStateManager.pushMatrix();

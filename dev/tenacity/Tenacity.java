@@ -6,7 +6,6 @@ import dev.tenacity.config.DragManager;
 import dev.tenacity.event.EventProtocol;
 import dev.tenacity.intent.api.account.IntentAccount;
 import dev.tenacity.intent.cloud.CloudDataManager;
-import dev.tenacity.intent.irc.IRCUtil;
 import dev.tenacity.module.Module;
 import dev.tenacity.module.ModuleCollection;
 import dev.tenacity.scripting.api.ScriptManager;
@@ -55,7 +54,6 @@ public class Tenacity implements Utils {
     private CommandHandler commandHandler;
     private PingerUtils pingerUtils;
     private DiscordRPC discordRPC;
-    private IRCUtil ircUtil;
     public KingGenApi kingGenApi;
     private DiscordAccount discordAccount;
 

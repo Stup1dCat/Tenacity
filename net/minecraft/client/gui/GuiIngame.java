@@ -374,12 +374,10 @@ public class GuiIngame extends Gui implements Utils {
         GlStateManager.disableAlpha();
         GlStateManager.pushMatrix();
         GlStateManager.translate(0.0F, (float) (j - 48), 0.0F);
-        IRC.filter = true;
         this.mc.mcProfiler.startSection("chat");
         this.persistantChatGUI.drawChat(this.updateCounter);
         this.mc.mcProfiler.endSection();
         GlStateManager.popMatrix();
-        IRC.filter = false;
         scoreobjective1 = scoreboard.getObjectiveInDisplaySlot(0);
 
         if (this.mc.gameSettings.keyBindPlayerList.isKeyDown() && (!this.mc.isIntegratedServerRunning() || this.mc.thePlayer.sendQueue.getPlayerInfoMap().size() > 1 || scoreobjective1 != null)) {
