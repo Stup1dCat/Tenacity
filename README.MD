@@ -1,4 +1,4 @@
 # Tenacity
-Tenacity 5.0 Src
+Tenacity 5.1 Src
 
-Deleted IRC
+Src from [HCU-Reborn/Tenacity](https://github.com/HCU-Reborn/Tenacity)

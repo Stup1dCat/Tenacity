@@ -49,18 +49,7 @@ public class ProtectedLaunch {
     @Bootstrap
     public static void start() {
         // Setup Intent API access
-        IntentAccount intentAccount = new GetUserInfo().getIntentAccount(Main.apiKey);
-        Tenacity.INSTANCE.setIntentAccount(intentAccount);
-
-        /*if ((Main.apiKey == null || Main.apiKey.trim().isEmpty() || intentAccount == null || intentAccount.username == null || intentAccount.username.trim().isEmpty())
-                || (Tenacity.RELEASE != ReleaseType.DEV && intentAccount.client_uid == 0)) {
-            JFrame frame = new JFrame();
-            frame.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(frame, "Failed to authenticate you. Please contact support if this issue persists.", "Launch Failure", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
-            throw new RuntimeException("You died.");
-        }*/
-
+        Tenacity.INSTANCE.setIntentAccount(GetUserInfo.loginFailure);
         Tenacity.INSTANCE.setModuleCollection(new ModuleCollection());
 
         // Combat
