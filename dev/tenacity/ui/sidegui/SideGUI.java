@@ -216,6 +216,10 @@ public class SideGUI implements Screen {
     }
 
     public void drawForEffects(boolean bloom) {
+        if (drag == null || openAnimation == null) {
+            System.out.println("Warning: drawForEffects called with null values. drag=" + drag + ", openAnimation=" + openAnimation);
+            return;
+        }
         ScaledResolution sr = new ScaledResolution(mc);
         float x = MathUtils.interpolateFloat(sr.getScaledWidth(), drag.getX(), openAnimation.getOutput());
         float y = drag.getY();
