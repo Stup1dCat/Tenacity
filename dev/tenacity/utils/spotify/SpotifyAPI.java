@@ -122,7 +122,7 @@ public class SpotifyAPI implements Utils {
 
     public void build(String clientID) {
         spotifyApi = new SpotifyApi.Builder().setClientId(clientID)
-                .setRedirectUri(SpotifyHttpManager.makeUri("http://localhost:4030"))
+                .setRedirectUri(SpotifyHttpManager.makeUri("http://127.0.0.1:4030"))
                 .build();
 
         authCodeUriRequest = spotifyApi.authorizationCodePKCEUri(CODE_CHALLENGE)
