@@ -332,6 +332,13 @@ public class ItemRenderer {
         GlStateManager.scale(1.0F, 1.0F, 1.0F + f1 * 0.2F);
     }
 
+    private void func_178103_d(float qq) {
+        GlStateManager.translate(-0.5F, qq, 0.0F);
+        GlStateManager.rotate(30.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-80.0F, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate(60.0F, 0.0F, 1.0F, 0.0F);
+    }
+
     /**
      * Translate and rotate the render for holding a block
      */
@@ -364,6 +371,7 @@ public class ItemRenderer {
                     this.renderItemMap(abstractclientplayer, f2, f, swingProgress);
                 } else if (abstractclientplayer.getItemInUseCount() > 0 || (KillAura.blocking && InventoryUtils.getHeldItem() instanceof ItemSword)) {
                     EnumAction enumaction = this.itemToRender.getItemUseAction();
+                    float f1 = abstractclientplayer.getSwingProgress(partialTicks);
                     float var15 = MathHelper.sin(swingProgress * swingProgress * 3.1415927F);
                     float var16 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * 3.1415927F);
                     switch (enumaction) {
@@ -455,6 +463,24 @@ public class ItemRenderer {
                                         this.doBlockTransformations();
                                         GL11.glTranslated(1.2, 0.3, 0.5);
                                         GL11.glTranslatef(-1, this.mc.thePlayer.isSneaking() ? -0.1F : -0.2F, 0.2F);
+                                        break;
+                                    case "Styles":
+                                        this.transformFirstPersonItem(f, 0.0F);
+                                        this.func_178103_d(0.2F);
+                                        float var11 = MathHelper.sin((float) (MathHelper.sqrt_float(swingProgress) * Math.PI));
+                                        GlStateManager.translate(-0.05f, 0.2f, 0.0f);
+                                        GlStateManager.rotate(-var11 * 70.0f / 2.0f, -8.0f, -0.0f, 9.0f);
+                                        GlStateManager.rotate(-var11 * 70.0f, 1.0f, -0.4f, -0.0f);
+                                        break;
+                                    case "Leaked":
+                                        transformFirstPersonItem(0.0f,0.0f);
+                                        GlStateManager.translate(-0.5F, 0.3F, 0.0F);
+                                        GlStateManager.rotate(30.0F, 0.0F, 1.0F, 0.0F);
+                                        GlStateManager.rotate(-87.0F, 1.0F, 0.0F, 0.0F);
+                                        GlStateManager.rotate(60.0F, 0.0F, 1.0F, 0.0F);
+                                        float f13 = MathHelper.sin(MathHelper.sqrt_float(f1) * (float)Math.PI);
+                                        GlStateManager.rotate(f13 * 35.0F / 2.0F, 0.0F, 1.0F, 1.3F);
+                                        GlStateManager.rotate(-f13 * 135.0F / 4.0F, 1.3f, 1.0F, 0.0F);
                                         break;
                                     case "Custom":
                                         CustomBlockRenderEvent blockRenderEvent = new CustomBlockRenderEvent(

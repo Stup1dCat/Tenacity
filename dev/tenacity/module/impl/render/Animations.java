@@ -10,7 +10,7 @@ import dev.tenacity.module.settings.impl.NumberSetting;
 public final class Animations extends Module {
 
     public static final ModeSetting mode = new ModeSetting("Mode", "Stella",
-            "Stella", "Middle", "1.7", "Exhi", "Exhi 2", "Exhi 3", "Exhi 4", "Exhi 5", "Shred", "Smooth", "Sigma", "Custom");
+            "Stella", "Middle", "1.7", "Exhi", "Exhi 2", "Exhi 3", "Exhi 4", "Exhi 5", "Shred", "Smooth", "Sigma", "Styles", "Leaked","Custom");
     public static final NumberSetting slowdown = new NumberSetting("Swing Slowdown", 1, 15, 1, 1);
     public static final BooleanSetting oldDamage = new BooleanSetting("Old Damage", false);
     public static final BooleanSetting smallSwing = new BooleanSetting("Small Swing", false);
