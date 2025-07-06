@@ -42,8 +42,8 @@ public class HUDMod extends Module {
 
     private final StringSetting clientName = new StringSetting("Client Name");
     private final ModeSetting watermarkMode = new ModeSetting("Watermark Mode", "Tenacity", "Tenacity", "Plain Text", "Neverlose", "Tenasense", "Tenabition", "Logo", "None");
-    public static final ColorSetting color1 = new ColorSetting("Color 1", new Color(0xffa028d4));
-    public static final ColorSetting color2 = new ColorSetting("Color 2", new Color(0xff0008ff));
+    public static final ColorSetting color1 = new ColorSetting("Color 1", new Color(0xff59d16));
+    public static final ColorSetting color2 = new ColorSetting("Color 2", new Color(0xff32ffd1));
     public static final ModeSetting theme = Theme.getModeSetting("Theme Selection", "Tenacity");
     public static final BooleanSetting customFont = new BooleanSetting("Custom Font", true);
     private static final MultipleBoolSetting infoCustomization = new MultipleBoolSetting("Info Options",

@@ -18,7 +18,7 @@ import dev.tenacity.utils.player.RotationUtils;
 import dev.tenacity.utils.render.RenderUtil;
 import dev.tenacity.utils.server.PacketUtils;
 import dev.tenacity.utils.time.TimerUtil;
-import dev.tenacity.viamcp.utils.AttackOrder;
+import de.florianmichael.viamcp.fixes.AttackOrder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -30,11 +30,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import java.awt.*;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public final class KillAura extends Module {
 

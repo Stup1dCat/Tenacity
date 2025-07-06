@@ -8,6 +8,8 @@ import store.intent.intentguard.annotation.Strategy;
 public class MoveEvent extends Event {
 
     private double x, y, z;
+    private float strafe;
+    private float forward;
 
     public MoveEvent(double x, double y, double z) {
         this.x = x;
@@ -43,6 +45,16 @@ public class MoveEvent extends Event {
     @Exclude(Strategy.NAME_REMAPPING)
     public void setZ(double z) {
         this.z = z;
+    }
+
+    @Exclude(Strategy.NAME_REMAPPING)
+    public float getStrafe() {
+        return strafe;
+    }
+
+    @Exclude(Strategy.NAME_REMAPPING)
+    public float getForward() {
+        return forward;
     }
 
     @Exclude(Strategy.NAME_REMAPPING)

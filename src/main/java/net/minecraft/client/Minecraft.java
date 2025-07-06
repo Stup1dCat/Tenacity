@@ -24,7 +24,7 @@ import dev.tenacity.ui.clickguis.dropdown.DropdownClickGUI;
 import dev.tenacity.ui.mainmenu.CustomMainMenu;
 import dev.tenacity.utils.font.FontUtil;
 import dev.tenacity.utils.misc.SoundUtils;
-import dev.tenacity.viamcp.utils.AttackOrder;
+import de.florianmichael.viamcp.fixes.AttackOrder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;

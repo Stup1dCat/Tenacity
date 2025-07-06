@@ -2,6 +2,8 @@ package dev.tenacity.protection;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
+import de.florianmichael.vialoadingbase.ViaLoadingBase;
 import dev.tenacity.Tenacity;
 import dev.tenacity.commands.CommandHandler;
 import dev.tenacity.commands.impl.*;
@@ -29,13 +31,11 @@ import dev.tenacity.utils.objects.DiscordAccount;
 import dev.tenacity.utils.render.EntityCulling;
 import dev.tenacity.utils.render.Theme;
 import dev.tenacity.utils.server.PingerUtils;
-import dev.tenacity.viamcp.ViaMCP;
+import de.florianmichael.viamcp.ViaMCP;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.main.Main;
 import store.intent.intentguard.annotation.Bootstrap;
 import store.intent.intentguard.annotation.Native;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -191,47 +191,14 @@ public class ProtectedLaunch {
         Tenacity.INSTANCE.kingGenApi = new KingGenApi();
 
         try {
-            Tenacity.LOGGER.info("Starting ViaMCP...");
-            ViaMCP viaMCP = ViaMCP.getInstance();
-            viaMCP.start();
-            viaMCP.initAsyncSlider(100, 100, 110, 20);
+            ViaMCP.create();
+            ViaMCP.INSTANCE.initAsyncSlider();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        downloadDiscordImages();
+        ViaLoadingBase.getInstance().reload(ProtocolVersion.v1_8);
     }
 
-    private static void downloadDiscordImages() {
-        if (Tenacity.INSTANCE.getIntentAccount().discord_id != null && !Tenacity.INSTANCE.getIntentAccount().discord_id.isEmpty()) {
-            IntentAccount intentAccount = Tenacity.INSTANCE.getIntentAccount();
-            NetworkingUtils.HttpResponse response = NetworkingUtils.httpsConnection("https://api.senoe.win/discord/user/" + intentAccount.discord_id);
-            if (response != null && response.getResponse() == 200) {
-                DiscordAccount discordAccount = new DiscordAccount();
-                JsonObject responseObject = JsonParser.parseString(response.getContent()).getAsJsonObject();
-
-                if (responseObject.has("avatar")) {
-                    String avatarIDActual = responseObject.get("avatar").isJsonNull() ? null : responseObject.get("avatar").getAsString();
-                    if (avatarIDActual == null) return;
-                    String url = "https://cdn.discordapp.com/avatars/" + intentAccount.discord_id + "/" + avatarIDActual + ".png?size=64";
-                    discordAccount.setDiscordAvatar(NetworkingUtils.downloadImage(url));
-                }
-
-                if (responseObject.has("banner")) {
-                    if (responseObject.get("banner").isJsonNull()) {
-                        discordAccount.setBannerColor(responseObject.get("banner_color").isJsonNull() ? "000000" : responseObject.get("banner_color").getAsString().substring(1));
-                    } else {
-                        // Load the banner image
-                        String bannerID = responseObject.get("banner").getAsString();
-                        if (bannerID == null) return;
-                        String finalURL = "https://cdn.discordapp.com/banners/" + intentAccount.discord_id + "/" + bannerID + ".png?size=256";
-                        discordAccount.setDiscordBanner(NetworkingUtils.downloadImage(finalURL));
-                    }
-                }
-                Tenacity.INSTANCE.setDiscordAccount(discordAccount);
-            }
-        }
-    }
 
     @SafeVarargs
     private static void addModules(Class<? extends Module>... classes) {
