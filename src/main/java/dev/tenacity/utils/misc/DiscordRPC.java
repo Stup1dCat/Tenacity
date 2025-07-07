@@ -24,7 +24,7 @@ public class DiscordRPC {
     private Core core;
 
     public DiscordRPC() {
-        try {
+        /*try {
             File discordLibrary = downloadNativeLibrary();
             if (discordLibrary == null) {
                 System.err.println("Failed to download Discord SDK.");
@@ -36,7 +36,7 @@ public class DiscordRPC {
             start();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static File downloadNativeLibrary() throws IOException {
