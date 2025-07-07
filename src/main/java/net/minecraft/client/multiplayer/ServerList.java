@@ -41,8 +41,7 @@ public class ServerList
                 return;
             }
 
-            servers.add(new ServerData("No Rules HvH Server", "play.norules.wtf", false));
-            servers.add(new ServerData("No Rules SMP Server", "smp.norules.wtf", false));
+            servers.add(new ServerData("Anti-cheat test server", "mc.loyisa.cn", false));
 
             NBTTagList nbttaglist = nbttagcompound.getTagList("servers", 10);
 
@@ -69,8 +68,7 @@ public class ServerList
 
             for (ServerData serverdata : this.servers)
             {
-                if(serverdata.serverIP.equals("play.norules.wtf")) continue;
-                if(serverdata.serverIP.equals("smp.norules.wtf")) continue;
+                if(serverdata.serverIP.equals("mc.loyisa.cn")) continue;
                 nbttaglist.appendTag(serverdata.getNBTCompound());
             }
 

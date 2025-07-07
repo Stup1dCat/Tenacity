@@ -65,7 +65,7 @@ public class ServerListEntryNormal implements GuiListExtended.IGuiListEntry {
             });
         }
 
-        if(server.serverIP.equals("smp.norules.wtf") || server.serverIP.equals("play.norules.wtf")) {
+        if(server.serverIP.equals("mc.loyisa.cn") || server.serverIP.equals("mc.hypixel.net")) {
             RenderUtil.scaleStart(x - 20, y, 2);
             this.mc.fontRendererObj.drawString("§6★", x - 20, y, -1);
             RenderUtil.scaleEnd();

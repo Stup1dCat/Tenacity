@@ -99,6 +99,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
      * Called from the main game loop to update the screen.
      */
     public void updateScreen() {
+        ViaMCP.INSTANCE.getAsyncVersionSlider().xPosition = this.width - 115;
         super.updateScreen();
 
         if (this.lanServerList.getWasUpdated()) {
