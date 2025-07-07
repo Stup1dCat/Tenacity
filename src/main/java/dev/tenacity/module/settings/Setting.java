@@ -3,6 +3,8 @@ package dev.tenacity.module.settings;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import jdk.nashorn.api.scripting.JSObject;
+import lombok.Getter;
+import lombok.Setter;
 import store.intent.intentguard.annotation.Exclude;
 import store.intent.intentguard.annotation.Strategy;
 
@@ -16,18 +18,12 @@ public abstract class Setting {
     @Expose
     @SerializedName("name")
     public String name;
+    @Setter
+    @Getter
     private List<ParentAttribute<? extends Setting>> parents = new ArrayList<>();
 
     public boolean hasParent() {
         return !parents.isEmpty();
-    }
-
-    public List<ParentAttribute<? extends Setting>> getParents() {
-        return parents;
-    }
-
-    public void setParents(List<ParentAttribute<? extends Setting>> parents) {
-        this.parents = parents;
     }
 
     public void addParent(ParentAttribute<? extends Setting> parent) {
