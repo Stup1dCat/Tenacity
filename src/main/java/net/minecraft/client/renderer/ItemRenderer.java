@@ -473,14 +473,11 @@ public class ItemRenderer {
                                         GlStateManager.rotate(-var11 * 70.0f, 1.0f, -0.4f, -0.0f);
                                         break;
                                     case "Leaked":
-                                        transformFirstPersonItem(0.0f,0.0f);
-                                        GlStateManager.translate(-0.5F, 0.3F, 0.0F);
-                                        GlStateManager.rotate(30.0F, 0.0F, 1.0F, 0.0F);
-                                        GlStateManager.rotate(-87.0F, 1.0F, 0.0F, 0.0F);
-                                        GlStateManager.rotate(60.0F, 0.0F, 1.0F, 0.0F);
-                                        float f13 = MathHelper.sin(MathHelper.sqrt_float(f1) * (float)Math.PI);
-                                        GlStateManager.rotate(f13 * 35.0F / 2.0F, 0.0F, 1.0F, 1.3F);
-                                        GlStateManager.rotate(-f13 * 135.0F / 4.0F, 1.3f, 1.0F, 0.0F);
+                                        final float var = MathHelper.sin((float) (MathHelper.sqrt_float(f1) * Math.PI));
+                                        transformFirstPersonItem(0.0F, 0.0f);
+                                        GlStateManager.translate(0.08F, 0.02f, 0.0F);
+                                        doBlockTransformations();
+                                        GlStateManager.rotate(-var * 41F, 1.1F, 0.8F, -0.3F);
                                         break;
                                     case "Custom":
                                         CustomBlockRenderEvent blockRenderEvent = new CustomBlockRenderEvent(
